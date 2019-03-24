@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:ignore="MissingDefaultResource"
     android:baselineAligned="false">
-        <fragment android:name="ru.alexey.weather.fragments.FragmentSearchAndPreferences"
+        <fragment android:name="ru.alexey.weather.Fragments.FragmentSearchAndPreferences"
             android:id="@+id/fragment_search"
             android:layout_height="match_parent"
             android:layout_width="@dimen/dp"

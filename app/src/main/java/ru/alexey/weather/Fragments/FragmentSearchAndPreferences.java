@@ -1,4 +1,4 @@
-package ru.alexey.weather.fragments;
+package ru.alexey.weather.Fragments;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -94,6 +94,7 @@ public class FragmentSearchAndPreferences extends Fragment {
                 onClickBtnAboutWeather();
             }
         });
+
     }
 
     private void onClickBtnSearch() {

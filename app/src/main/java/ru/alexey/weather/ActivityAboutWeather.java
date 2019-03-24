@@ -4,9 +4,9 @@ import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import ru.alexey.weather.fragments.FragmentAboutApp;
-import ru.alexey.weather.fragments.FragmentAboutWeather;
-import ru.alexey.weather.fragments.FragmentSearchAndPreferences;
+import ru.alexey.weather.Fragments.FragmentAboutApp;
+import ru.alexey.weather.Fragments.FragmentAboutWeather;
+import ru.alexey.weather.Fragments.FragmentSearchAndPreferences;
 
 public class ActivityAboutWeather extends AppCompatActivity {
     @Override

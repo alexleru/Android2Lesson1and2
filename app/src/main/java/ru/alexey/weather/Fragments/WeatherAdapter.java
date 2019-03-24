@@ -1,4 +1,4 @@
-package ru.alexey.weather.fragments;
+package ru.alexey.weather.Fragments;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
