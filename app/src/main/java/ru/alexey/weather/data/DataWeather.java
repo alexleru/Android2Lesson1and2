@@ -1,5 +1,4 @@
-package ru.alexey.weather.data;
-
+package ru.alexey.weather.Data;
 
 //Создал временно, типа поставшик данных
 public class DataWeather {

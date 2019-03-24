@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ru.alexey.weather.ActivityAboutWeather;
 import ru.alexey.weather.R;
@@ -96,11 +97,18 @@ public class FragmentSearchAndPreferences extends Fragment {
     }
 
     private void onClickBtnSearch() {
-        if(isExitFragmentAboutWeather){
-            showFragmentAboutWeather();
-        }
-        else{
-            startActivity(getIntentAboutWeather());
+        String cityInEditText = editText.getText().toString();
+        if (cityInEditText.equals("") || cityInEditText.equals(null)){
+            Toast.makeText(getActivity(),
+                    getContext().getResources().getText(R.string.attention_city_name),
+                    Toast.LENGTH_LONG).show();
+        }else {
+            if(isExitFragmentAboutWeather){
+                showFragmentAboutWeather();
+            }
+            else{
+                startActivity(getIntentAboutWeather());
+            }
         }
     }
 

@@ -11,4 +11,5 @@
     <string name="city_name">City</string>
     <string name="about_app">About App Weather</string>
     <string name="author">Author: Alexey</string>
+    <string name="attention_city_name">Enter the name of the city</string>
 </resources>

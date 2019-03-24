@@ -2,20 +2,19 @@ package ru.alexey.weather.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import ru.alexey.weather.data.DataWeather;
 import ru.alexey.weather.R;
 
 public class FragmentAboutWeather extends Fragment {
 
-    TextView textCityName;
-    TextView textCell;
-    int index = 0;
+    private RecyclerView recyclerView;
+    private WeatherAdapter weatherAdapter;
 
     public static FragmentAboutWeather create(Bundle bundle){
         FragmentAboutWeather fragmentAboutWeather = new FragmentAboutWeather();
@@ -26,7 +25,20 @@ public class FragmentAboutWeather extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_about_weather, container, false);
+        return inflater.inflate(R.layout.fragment_about_weather, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView = view.findViewById(R.id.recycle_fragment_item);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        weatherAdapter = new WeatherAdapter(getCityName(), getAddData());
+        recyclerView.setAdapter(weatherAdapter);
+    }
+
+    private String getCityName(){
         String cityName;
         try {
             cityName = getArguments().getString(FragmentSearchAndPreferences.CITY, "empty search");
@@ -34,16 +46,10 @@ public class FragmentAboutWeather extends Fragment {
             e.printStackTrace();
             cityName = "empty search";
         }
-        textCityName = view.findViewById(R.id.text_view_city_name);
-        textCityName.setText(cityName);
-        textCell = view.findViewById(R.id.linear_layout_cell);
-        textCell.setText(DataWeather.getTemperature()[0]);
-        getAddData();
-        return view;
+        return cityName;
     }
 
-
-    private void getAddData(){
+    private boolean [] getAddData(){
         boolean [] showAddData;
         try {
             showAddData = getArguments().getBooleanArray(FragmentSearchAndPreferences.ADDDATA);
@@ -51,18 +57,6 @@ public class FragmentAboutWeather extends Fragment {
             e.printStackTrace();
             showAddData = null;
         }
-        if (showAddData != null) {
-            for (int i = 0 ; i < showAddData.length; i++){
-                if (showAddData[i] && i == 0) {
-                    textCell.append("\n " + DataWeather.getWind()[index] + ",  " + DataWeather.getWindDirection()[index]);
-                }
-                if (showAddData[i] && i == 1) {
-                    textCell.append("\n " + DataWeather.getHumidity()[index]);
-                }
-                if (showAddData[i] && i == 2) {
-                    textCell.append("\n " + DataWeather.getPressure()[index]);
-                }
-            }
-        }
+        return showAddData;
     }
 }
