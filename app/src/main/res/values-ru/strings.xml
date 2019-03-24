@@ -11,4 +11,6 @@
     <string name="about_app">О программе Погода</string>
     <string name="author">Автор: Алексей</string>
     <string name="attention_city_name">Вы не ввели город!</string>
+    <string name="saint_petersburg">Санкт-Петербург</string>
+    <string name="moscow">Москва</string>
 </resources>

@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import ru.alexey.weather.Data.DataWeather;
 import ru.alexey.weather.R;
 

@@ -3,7 +3,6 @@ package ru.alexey.weather;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import ru.alexey.weather.Fragments.FragmentAboutApp;
 import ru.alexey.weather.Fragments.FragmentAboutWeather;
 import ru.alexey.weather.Fragments.FragmentSearchAndPreferences;

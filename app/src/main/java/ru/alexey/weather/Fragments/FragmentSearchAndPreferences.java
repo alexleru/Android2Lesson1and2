@@ -7,28 +7,25 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import java.util.Objects;
 import ru.alexey.weather.ActivityAboutWeather;
 import ru.alexey.weather.R;
 
 public class FragmentSearchAndPreferences extends Fragment {
     private View view;
-    private EditText editText;
+    private String cityName;
     private SwitchCompat[] switchCompat = new SwitchCompat[3];
     public final static String CITY = "CITY";
     public final static String ADDDATA = "ADDDATA";
     public final static String ABOUT = "ABOUT";
     private boolean [] showAddData = new boolean[3];
     private boolean isExitFragmentAboutWeather;
-
 
     @Nullable
     @Override
@@ -46,7 +43,7 @@ public class FragmentSearchAndPreferences extends Fragment {
 
     private Intent getIntentAboutWeather() {
         Intent intent = new Intent(getActivity(), ActivityAboutWeather.class);
-        intent.putExtra(CITY, editText.getText().toString());
+        intent.putExtra(CITY, cityName);
         intent.putExtra(ABOUT, "ABOUT_WEATHER");
         getDataFromSwitchCompat();
         intent.putExtra(ADDDATA, showAddData);
@@ -61,7 +58,7 @@ public class FragmentSearchAndPreferences extends Fragment {
 
     private Bundle getBundleAboutWeather() {
         Bundle bundle = new Bundle();
-        bundle.putString(CITY, editText.getText().toString());
+        bundle.putString(CITY, cityName);
         getDataFromSwitchCompat();
         bundle.putBooleanArray(ADDDATA, showAddData);
         return bundle;
@@ -74,19 +71,9 @@ public class FragmentSearchAndPreferences extends Fragment {
     }
 
     private void initView(){
-        TextView textView = view.findViewById(R.id.weather);
-        textView.setText(getString(R.string.label));
-        editText = view.findViewById(R.id.edit_text);
         switchCompat[0] = view.findViewById(R.id.show_wind);
         switchCompat[1] = view.findViewById(R.id.show_humidity);
         switchCompat[2] = view.findViewById(R.id.show_pressure);
-        Button buttonSearch = view.findViewById(R.id.button_search);
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickBtnSearch();
-            }
-        });
         Button buttonAboutProgram = view.findViewById(R.id.button_about_program);
         buttonAboutProgram.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,22 +81,29 @@ public class FragmentSearchAndPreferences extends Fragment {
                 onClickBtnAboutWeather();
             }
         });
-
+        CardView cardViewMoscow = view.findViewById(R.id.cardViewMoscow);
+        cardViewMoscow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickBtnSearch(Objects.requireNonNull(getActivity()).getResources().getString(R.string.moscow));
+            }
+        });
+        CardView cardViewPeterburg = view.findViewById(R.id.cardViewSaintPeterburg);
+        cardViewPeterburg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickBtnSearch(Objects.requireNonNull(getActivity()).getResources().getString(R.string.saint_petersburg));
+            }
+        });
     }
 
-    private void onClickBtnSearch() {
-        String cityInEditText = editText.getText().toString();
-        if (cityInEditText.equals("") || cityInEditText.equals(null)){
-            Toast.makeText(getActivity(),
-                    getContext().getResources().getText(R.string.attention_city_name),
-                    Toast.LENGTH_LONG).show();
-        }else {
-            if(isExitFragmentAboutWeather){
-                showFragmentAboutWeather();
-            }
-            else{
-                startActivity(getIntentAboutWeather());
-            }
+    private void onClickBtnSearch(String cityNameOfCard) {
+        cityName = cityNameOfCard;
+        if(isExitFragmentAboutWeather){
+            showFragmentAboutWeather();
+        }
+        else {
+            startActivity(getIntentAboutWeather());
         }
     }
 
