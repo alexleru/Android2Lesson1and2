@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,8 @@ import ru.alexey.weather.R;
 public class FragmentSearchAndPreferences extends Fragment {
     private View view;
     private String cityName;
-    private SwitchCompat[] switchCompat = new SwitchCompat[3];
     public final static String CITY = "CITY";
-    public final static String ADDDATA = "ADDDATA";
     public final static String ABOUT = "ABOUT";
-    private boolean [] showAddData = new boolean[3];
     private boolean isExitFragmentAboutWeather;
 
     @Nullable
@@ -45,8 +41,6 @@ public class FragmentSearchAndPreferences extends Fragment {
         Intent intent = new Intent(getActivity(), ActivityAboutWeather.class);
         intent.putExtra(CITY, cityName);
         intent.putExtra(ABOUT, "ABOUT_WEATHER");
-        getDataFromSwitchCompat();
-        intent.putExtra(ADDDATA, showAddData);
         return intent;
     }
 
@@ -59,21 +53,11 @@ public class FragmentSearchAndPreferences extends Fragment {
     private Bundle getBundleAboutWeather() {
         Bundle bundle = new Bundle();
         bundle.putString(CITY, cityName);
-        getDataFromSwitchCompat();
-        bundle.putBooleanArray(ADDDATA, showAddData);
         return bundle;
     }
 
-    private void getDataFromSwitchCompat(){
-        for (int i = 0; i < showAddData.length; i++){
-            showAddData[i] = switchCompat[i].isChecked();
-        }
-    }
 
     private void initView(){
-        switchCompat[0] = view.findViewById(R.id.show_wind);
-        switchCompat[1] = view.findViewById(R.id.show_humidity);
-        switchCompat[2] = view.findViewById(R.id.show_pressure);
         Button buttonAboutProgram = view.findViewById(R.id.button_about_program);
         buttonAboutProgram.setOnClickListener(new View.OnClickListener() {
             @Override

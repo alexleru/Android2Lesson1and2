@@ -6,15 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.SingleLineTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ru.alexey.weather.R;
+import ru.alexey.weather.Singleton;
 
 public class FragmentAboutWeather extends Fragment {
 
     private RecyclerView recyclerView;
     private WeatherAdapter weatherAdapter;
+    Singleton singleton = Singleton.getInstance();
 
     public static FragmentAboutWeather create(Bundle bundle){
         FragmentAboutWeather fragmentAboutWeather = new FragmentAboutWeather();
@@ -50,13 +53,6 @@ public class FragmentAboutWeather extends Fragment {
     }
 
     private boolean [] getAddData(){
-        boolean [] showAddData;
-        try {
-            showAddData = getArguments().getBooleanArray(FragmentSearchAndPreferences.ADDDATA);
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAddData = null;
-        }
-        return showAddData;
+        return singleton.getAddData();
     }
 }

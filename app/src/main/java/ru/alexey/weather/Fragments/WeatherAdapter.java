@@ -68,21 +68,20 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
         calendar.add(Calendar.DATE, index);
         String addInfo = dateFormat.format(calendar.getTime());
         addInfo = addInfo.concat(delimiter + DataWeather.getTemperature()[index]);
-            for (int i = 0 ; i < addData.length; i++){
-
-                if (addData[i] && i == 0) {
-                    addInfo = addInfo.concat(delimiter
-                            + DataWeather.getWind()[index]
-                            + ",  "
-                            + DataWeather.getWindDirection()[index]);
-                }
-                if (addData[i] && i == 1) {
-                    addInfo = addInfo.concat(delimiter + DataWeather.getHumidity()[index]);
-                }
-                if (addData[i] && i == 2) {
-                    addInfo = addInfo.concat(delimiter + DataWeather.getPressure()[index]);
-                    }
+        for (int i = 0 ; i < addData.length; i++){
+            if (addData[i] && i == 0) {
+                addInfo = addInfo.concat(delimiter
+                        + DataWeather.getWind()[index]
+                        + ",  "
+                        + DataWeather.getWindDirection()[index]);
             }
+            if (addData[i] && i == 1) {
+                addInfo = addInfo.concat(delimiter + DataWeather.getHumidity()[index]);
+            }
+            if (addData[i] && i == 2) {
+                addInfo = addInfo.concat(delimiter + DataWeather.getPressure()[index]);
+                }
+        }
         return  addInfo;
     }
 }

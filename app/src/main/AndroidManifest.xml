@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.alexey.weather.ActivityAboutWeather">
+        <activity android:name=".ActivityAboutWeather"
+                android:theme="@style/Theme.AppCompat">
         </activity>
     </application>
 
