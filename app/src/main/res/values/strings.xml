@@ -14,4 +14,6 @@
     <string name="attention_city_name">Enter the name of the city</string>
     <string name="moscow">Moscow</string>
     <string name="saint_petersburg">Saint-Petersburg</string>
+    <string name="nav_header_subtitle">Menu</string>
+    <string name="feedback">Feedback</string>
 </resources>

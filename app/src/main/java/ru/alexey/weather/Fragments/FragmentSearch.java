@@ -16,7 +16,7 @@ import java.util.Objects;
 import ru.alexey.weather.ActivityAboutWeather;
 import ru.alexey.weather.R;
 
-public class FragmentSearchAndPreferences extends Fragment {
+public class FragmentSearch extends Fragment{
     private View view;
     private String cityName;
     public final static String CITY = "CITY";
@@ -26,7 +26,7 @@ public class FragmentSearchAndPreferences extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_search_and_preferences, container, false);
+        view = inflater.inflate(R.layout.fragment_search, container, false);
         initView();
         return view;
     }
@@ -56,13 +56,12 @@ public class FragmentSearchAndPreferences extends Fragment {
         return bundle;
     }
 
-
     private void initView(){
         Button buttonAboutProgram = view.findViewById(R.id.button_about_program);
         buttonAboutProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickBtnAboutWeather();
+                onClickBtnAboutApp();
             }
         });
         CardView cardViewMoscow = view.findViewById(R.id.cardViewMoscow);
@@ -91,7 +90,7 @@ public class FragmentSearchAndPreferences extends Fragment {
         }
     }
 
-    private void onClickBtnAboutWeather() {
+    public void onClickBtnAboutApp() {
         if(isExitFragmentAboutWeather){
             showFragmentAboutApp();
         }

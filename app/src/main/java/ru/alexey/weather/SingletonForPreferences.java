@@ -1,14 +1,13 @@
 package ru.alexey.weather;
 
-public class Singleton {
-    private static Singleton instance;
+public class SingletonForPreferences {
+    private static SingletonForPreferences instance;
     private boolean[] addData = new boolean[3];
-    private Singleton(){
-    }
+    private SingletonForPreferences(){}
 
-    public static Singleton getInstance(){
+    public static SingletonForPreferences getInstance(){
         if(instance == null){
-            instance = new Singleton();
+            instance = new SingletonForPreferences();
         }
         return instance;
     }

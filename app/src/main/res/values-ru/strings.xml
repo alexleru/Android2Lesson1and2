@@ -13,4 +13,6 @@
     <string name="attention_city_name">Вы не ввели город!</string>
     <string name="saint_petersburg">Санкт-Петербург</string>
     <string name="moscow">Москва</string>
+    <string name="nav_header_subtitle">Меню</string>
+    <string name="feedback">Обратная связь</string>
 </resources>

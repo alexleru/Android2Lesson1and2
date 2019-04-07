@@ -24,12 +24,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        <fragment android:name="ru.alexey.weather.Fragments.FragmentSearchAndPreferences"
+        <fragment android:name="ru.alexey.weather.Fragments.FragmentSearch"
             android:id="@+id/fragment_search"
             android:layout_height="match_parent"
             android:layout_width="@dimen/dp"
             android:layout_weight="4"
-            tools:layout="@layout/fragment_search_and_preferences" />
+            tools:layout="@layout/fragment_search" />
         <FrameLayout
             android:id="@+id/fragment_about_weather"
             android:layout_width="@dimen/dp"

@@ -6,18 +6,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.method.SingleLineTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ru.alexey.weather.R;
-import ru.alexey.weather.Singleton;
+import ru.alexey.weather.SingletonForPreferences;
 
 public class FragmentAboutWeather extends Fragment {
 
     private RecyclerView recyclerView;
     private WeatherAdapter weatherAdapter;
-    Singleton singleton = Singleton.getInstance();
+    SingletonForPreferences singleton = SingletonForPreferences.getInstance();
 
     public static FragmentAboutWeather create(Bundle bundle){
         FragmentAboutWeather fragmentAboutWeather = new FragmentAboutWeather();
@@ -44,7 +43,7 @@ public class FragmentAboutWeather extends Fragment {
     private String getCityName(){
         String cityName;
         try {
-            cityName = getArguments().getString(FragmentSearchAndPreferences.CITY, "empty search");
+            cityName = getArguments().getString(FragmentSearch.CITY, "empty search");
         } catch (Exception e) {
             e.printStackTrace();
             cityName = "empty search";
