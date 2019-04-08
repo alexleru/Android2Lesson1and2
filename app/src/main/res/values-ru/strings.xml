@@ -15,4 +15,7 @@
     <string name="moscow">Москва</string>
     <string name="nav_header_subtitle">Меню</string>
     <string name="feedback">Обратная связь</string>
+    <string name="leave_your_feedback_here">Оставьте обратную связь здесь!</string>
+    <string name="send_feedback">отправить отзыв</string>
+    <string name="touch_the_picture_below">Нажми на картинку ниже</string>
 </resources>

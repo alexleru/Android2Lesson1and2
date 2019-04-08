@@ -16,4 +16,7 @@
     <string name="saint_petersburg">Saint-Petersburg</string>
     <string name="nav_header_subtitle">Menu</string>
     <string name="feedback">Feedback</string>
+    <string name="leave_your_feedback_here">Leave your feedback here!</string>
+    <string name="send_feedback">send feedback</string>
+    <string name="touch_the_picture_below">Touch the picture below</string>
 </resources>

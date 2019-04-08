@@ -11,12 +11,14 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import java.util.Objects;
 import ru.alexey.weather.ActivityAboutWeather;
 import ru.alexey.weather.R;
 
 public class FragmentSearch extends Fragment{
+    public static final String ABOUT_WEATHER = "ABOUT_WEATHER";
+    public static final String ABOUT_APP = "ABOUT_APP";
+    public static final String FEEDBACK = "FEEDBACK";
     private View view;
     private String cityName;
     public final static String CITY = "CITY";
@@ -30,6 +32,7 @@ public class FragmentSearch extends Fragment{
         initView();
         return view;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -40,13 +43,19 @@ public class FragmentSearch extends Fragment{
     private Intent getIntentAboutWeather() {
         Intent intent = new Intent(getActivity(), ActivityAboutWeather.class);
         intent.putExtra(CITY, cityName);
-        intent.putExtra(ABOUT, "ABOUT_WEATHER");
+        intent.putExtra(ABOUT, ABOUT_WEATHER);
         return intent;
     }
 
     private Intent getIntentAboutApp() {
         Intent intent = new Intent(getActivity(), ActivityAboutWeather.class);
-        intent.putExtra(ABOUT, "ABOUT_APP");
+        intent.putExtra(ABOUT, ABOUT_APP);
+        return intent;
+    }
+
+    private Intent getIntentFeedBack() {
+        Intent intent = new Intent(getActivity(), ActivityAboutWeather.class);
+        intent.putExtra(ABOUT, FEEDBACK);
         return intent;
     }
 
@@ -57,30 +66,23 @@ public class FragmentSearch extends Fragment{
     }
 
     private void initView(){
-        Button buttonAboutProgram = view.findViewById(R.id.button_about_program);
-        buttonAboutProgram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickBtnAboutApp();
-            }
-        });
         CardView cardViewMoscow = view.findViewById(R.id.cardViewMoscow);
         cardViewMoscow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickBtnSearch(Objects.requireNonNull(getActivity()).getResources().getString(R.string.moscow));
+                onClickCellSearch(Objects.requireNonNull(getActivity()).getResources().getString(R.string.moscow));
             }
         });
         CardView cardViewPeterburg = view.findViewById(R.id.cardViewSaintPeterburg);
         cardViewPeterburg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickBtnSearch(Objects.requireNonNull(getActivity()).getResources().getString(R.string.saint_petersburg));
+                onClickCellSearch(Objects.requireNonNull(getActivity()).getResources().getString(R.string.saint_petersburg));
             }
         });
     }
 
-    private void onClickBtnSearch(String cityNameOfCard) {
+    private void onClickCellSearch(String cityNameOfCard) {
         cityName = cityNameOfCard;
         if(isExitFragmentAboutWeather){
             showFragmentAboutWeather();
@@ -90,7 +92,7 @@ public class FragmentSearch extends Fragment{
         }
     }
 
-    public void onClickBtnAboutApp() {
+    public void onClickMenuAboutApp() {
         if(isExitFragmentAboutWeather){
             showFragmentAboutApp();
         }
@@ -99,9 +101,17 @@ public class FragmentSearch extends Fragment{
         }
     }
 
+    public void onClickMenuFeedback() {
+        if(isExitFragmentAboutWeather){
+            showFragmentFeedback();
+        }
+        else{
+            startActivity(getIntentFeedBack());
+        }
+    }
+
     private void showFragmentAboutWeather(){
-        FragmentAboutWeather detail;
-            detail = FragmentAboutWeather.create(getBundleAboutWeather());
+        FragmentAboutWeather detail = FragmentAboutWeather.create(getBundleAboutWeather());
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_about_weather, detail);
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
@@ -110,6 +120,14 @@ public class FragmentSearch extends Fragment{
 
     private void showFragmentAboutApp() {
         FragmentAboutApp detail = new FragmentAboutApp();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_about_weather, detail);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        fragmentTransaction.commit();
+    }
+
+    private void showFragmentFeedback() {
+        FragmentFeedback detail = new FragmentFeedback();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_about_weather, detail);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);

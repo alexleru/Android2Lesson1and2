@@ -11,5 +11,4 @@
         android:layout_height="wrap_content"
         android:text="@string/author"
         android:gravity="center_horizontal"/>
-
 </LinearLayout>
