@@ -1,5 +1,6 @@
 package ru.alexey.weather;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,12 +20,16 @@ import android.widget.TextView;
 
 import ru.alexey.weather.CustomView.CustomView;
 import ru.alexey.weather.Fragments.FragmentSearch;
+import ru.alexey.weather.Services.WeatherIntentService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String DATA_FOR_SERVICE = "DATA_FOR_SERVICE";
+    String old_data = "0";
     SingletonForPreferences singleton = SingletonForPreferences.getInstance();
     TextView textViewTemp;
     TextView textViewHum;
+    Intent intentToService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +46,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
-
         CustomView customView = header.findViewById(R.id.custom_view);
         customView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +73,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     SensorEventListener sensorEventListenerTemp = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            textViewTemp.setText("Temp: " + event.values[0] + "°C");
+            String temp = "Temp: " + event.values[0] + "°C";
+            startIntentService(temp);
+            textViewTemp.setText(temp);
         }
 
         @Override
@@ -84,7 +89,8 @@ public class MainActivity extends AppCompatActivity
     SensorEventListener sensorEventListenerHum = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            textViewHum.setText("Hum: " + event.values[0] + "%");
+            String hum = "Hum: " + event.values[0] + "%";
+            textViewHum.setText(hum);
         }
 
         @Override
@@ -92,7 +98,14 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-
+    public void startIntentService(String data){
+        if(!old_data.equals(data)){
+            intentToService = new Intent(MainActivity.this, WeatherIntentService.class);
+            intentToService.putExtra(DATA_FOR_SERVICE, data);
+            startService(intentToService);
+            old_data = data;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,5 +160,11 @@ public class MainActivity extends AppCompatActivity
     private void closeNav() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intentToService);
     }
 }
